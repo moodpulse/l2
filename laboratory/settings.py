@@ -4,6 +4,9 @@ import sys
 import warnings
 from collections import OrderedDict
 
+from psycopg2cffi import compat
+
+compat.register()
 
 PROFILING = False
 
