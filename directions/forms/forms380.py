@@ -426,7 +426,6 @@ def form_04(c: Canvas, dir: Napravleniya):
         styleSheet = getSampleStyleSheet()
         style = styleSheet["Normal"]
         style.fontName = "PTAstraSerifReg"
-        style.fontSize = 11
         style.leading = 12
         style.spaceAfter = 1.5 * mm
 
