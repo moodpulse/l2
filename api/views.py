@@ -528,6 +528,8 @@ def current_user_info(request):
         "fio": "",
         "department": {"pk": -1, "title": ""},
         "groups": [],
+        "eds_token": None,
+        "modules": SettingManager.l2_modules(),
         "user_services": [],
     }
     if ret["auth"]:
@@ -555,6 +557,7 @@ def current_user_info(request):
             ret["user_services"] = [x.pk for x in doctorprofile.users_services.all() if x not in ret["restricted"]]
             ret["hospital"] = doctorprofile.get_hospital_id()
             ret["all_hospitals_users_control"] = doctorprofile.all_hospitals_users_control
+            ret["eds_token"] = doctorprofile.get_eds_token()
 
             try:
                 connections.close_all()

@@ -50,6 +50,10 @@ class SettingManager:
         return SettingManager.get('l2_{}'.format(key), default='false', default_type='b')
 
     @staticmethod
+    def get_eds_base_url():
+        return SettingManager.get("eds_base_url", default='http://empty', default_type='s')
+
+    @staticmethod
     def l2_modules():
         k = SettingManager.FULL_CACHE_L2_KEY
         cv = cache.get(k)
@@ -84,13 +88,15 @@ class SettingManager:
                     "send_doc_calls",
                     "only_doc_call",
                     "forms",
+                    "eds",
                 ]
             },
             "consults_module": SettingManager.get("consults_module", default='false', default_type='b'),
             "directions_params": SettingManager.get("directions_params", default='false', default_type='b'),
             "morfology": SettingManager.is_morfology_enabled(SettingManager.en()),
+            "eds_base_url": SettingManager.get_eds_base_url(),
         }
-        cache.set(k, simplejson.dumps(result), 60 * 60 * 24)
+        cache.set(k, simplejson.dumps(result), 60 * 60 * 8)
 
         return result
 
@@ -115,7 +121,7 @@ class SettingManager:
                 12: SettingManager.get("directions_params", default='false', default_type='b'),
             }
 
-            cache.set(k, simplejson.dumps(result), 60 * 60 * 24)
+            cache.set(k, simplejson.dumps(result), 60 * 60 * 8)
 
         return {int(x): result[x] for x in result}
 

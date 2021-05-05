@@ -15,7 +15,7 @@ SECURE_CONTENT_TYPE_NOSNIFF = True
 SECURE_BROWSER_XSS_FILTER = True
 SECURE_HSTS_SECONDS = 1
 X_FRAME_OPTIONS = 'ALLOWALL'
-CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_ALL_ORIGINS = True
 INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.auth',
@@ -23,7 +23,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django.contrib.admindocs',
+    'corsheaders',
     'ajax_select',
     'health',
     'appconf.apps.AppconfConfig',
@@ -46,7 +46,6 @@ INSTALLED_APPS = (
     'rest_framework',
     'integration_framework',
     'django_logtail',
-    'corsheaders',
     'statistics_tickets',
     'reports',
     'mq.apps.MqConfig',
@@ -66,12 +65,11 @@ INSTALLED_APPS = (
 
 MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.contrib.admindocs.middleware.XViewMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.auth.middleware.RemoteUserMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
 ]
 INSTALLED_APPS_PRE_ADD = ()

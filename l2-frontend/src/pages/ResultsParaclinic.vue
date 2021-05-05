@@ -581,6 +581,7 @@
                 Отправить в АМД
               </button>
             </template>
+            <EDSButton :direction-data="data"/>
             <div class="status-list" v-if="!r(row) && !row.confirmed">
               <div class="status status-none">Не заполнено:</div>
               <div class="status status-none" v-for="rl in r_list(row)">{{rl}};</div>
@@ -750,10 +751,12 @@
   import api from "@/api";
   import ResultsByYear from '@/ui-cards/PatientResults/ResultsByYear';
   import RmisLink from '@/ui-cards/RmisLink'
+  import EDSButton from "@/ui-cards/EDSButton";
 
   export default {
     name: 'results-paraclinic',
     components: {
+      EDSButton,
       FastTemplates,
       BacMicroForm,
       DescriptiveForm,

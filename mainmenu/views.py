@@ -1,6 +1,7 @@
 import datetime
 import re
 from collections import defaultdict
+from urllib.parse import urljoin
 
 import simplejson as json
 from django.contrib.admin.views.decorators import staff_member_required
@@ -24,6 +25,7 @@ from directions.models import IstochnikiFinansirovaniya, TubesRegistration, Issl
 from laboratory import settings
 from laboratory.decorators import group_required
 from laboratory.utils import strdatetime
+from mainmenu.rproxy import proxy_view
 from podrazdeleniya.models import Podrazdeleniya
 from researches.models import Tubes
 from rmis_integration.client import Client
@@ -846,3 +848,7 @@ def directions(request):
         },
     })
     return render(request, 'dashboard/directions_ng.html', {"prefetched": prefetched})
+
+
+def eds(request, path):
+    return proxy_view(request, urljoin(SettingManager.get_eds_base_url(), path))

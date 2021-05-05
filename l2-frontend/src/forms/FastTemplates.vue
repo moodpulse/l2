@@ -22,7 +22,6 @@ export default {
       required: true,
     },
     value: {
-      type: String,
       required: true,
     },
     values: {
@@ -43,16 +42,22 @@ export default {
       default: '',
     }
   },
+  computed: {
+    localValue() {
+      return String(this.value);
+    },
+  },
   methods: {
     append_value(value) {
       let add_val = value;
+      const val = this.this.localValue;
       if (add_val !== ',' && add_val !== '.') {
-        if (this.value.length > 0 && this.value[this.value.length - 1] !== ' ' && this.value[this.value.length - 1] !== '\n') {
-          if (this.value[this.value.length - 1] === '.') {
+        if (val.length > 0 && val[val.length - 1] !== ' ' && val[val.length - 1] !== '\n') {
+          if (val[val.length - 1] === '.') {
             add_val = add_val.replace(/./, add_val.charAt(0).toUpperCase())
           }
           add_val = ' ' + add_val
-        } else if ((this.value.length === 0 || (this.value.length >= 2 && this.value[this.value.length - 2] === '.' && this.value[this.value.length - 1] === '\n')) && this.field_title === '') {
+        } else if ((val.length === 0 || (val.length >= 2 && val[val.length - 2] === '.' && val[val.length - 1] === '\n')) && this.field_title === '') {
           add_val = add_val.replace(/./, add_val.charAt(0).toUpperCase())
         }
       }
